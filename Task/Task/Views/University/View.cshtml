@@ -1,0 +1,225 @@
+﻿@model Task.Models.AdmissionFees
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/University/Index.cshtml";
+}
+
+<table align="center">
+<tr>
+<td>
+<h2>Admission</h2>
+</td>
+</tr>
+</table>
+@using (Html.BeginForm())
+{
+
+<div class="demo-section k-header">
+                        <div id="tabstrip">
+                            <ul>
+                                <li class="k-state-active">
+                                    Application Fees
+                                </li>
+                                <li>
+                                    Fall Adminssion
+                                </li>
+
+                                 <li>
+                                   Spring Adminssion
+                                </li>
+                                <li>
+                                    Summer Admission
+                                </li>
+                            </ul>
+                            <div>
+                                <div class="weather">
+                             
+                                      if (x.count == 1)
+                                      {
+                                          <p style=" margin-left:34%">Admission Fees Already Exist.</p>
+                                      }
+                                      else
+                                      {
+                                                            
+           
+                                       <div style="background-color:#e0e0e0; width:124%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:24%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+
+                                       
+                                          <table width="100%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td>
+                                            Application Fees
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Fee, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.International_Fee, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                            Application Fee Waiver
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Weaver, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.International_Weaver, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                           Fee Waiver Notes
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Notes, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.International_Notes, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                           Data URL
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_URL, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.International_URL, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                          </tr>
+                                          
+                                          <tr>
+                                          <td colspan="3" align="center">
+                                          <button id="primaryTextButton"  name="Save" value="Save" class="k-primary" style=" margin-top:2%;">Save</button>
+                                          </td>
+                                          </tr>
+                                          </table>
+
+
+                                  }
+
+                                </div>
+                                <span class="sunny">&nbsp;</span>
+                            </div>
+                            <div>
+                                <div class="weather">
+                                    <h2>29<span>&ordm;C</span></h2>
+                                    <p>Sunny weather in New York.</p>
+                                </div>
+                                <span class="sunny">&nbsp;</span>
+                            </div>
+                            <div>
+                                <div class="weather">
+                                    <h2>21<span>&ordm;C</span></h2>
+                                    <p>Sunny weather in London.</p>
+                                </div>
+                                <span class="sunny">&nbsp;</span>
+                            </div>
+                            <div>
+                                <div class="weather">
+                                    <h2>16<span>&ordm;C</span></h2>
+                                    <p>Cloudy weather in Moscow.</p>
+                                </div>
+                                <span class="cloudy">&nbsp;</span>
+                            </div>
+                            <div>
+                                <div class="weather">
+                                    <h2>17<span>&ordm;C</span></h2>
+                                    <p>Rainy weather in Sydney.</p>
+                                </div>
+                                <span class="rainy">&nbsp;</span>
+                            </div>
+                        </div>
+                </div>
+
+            <style>
+                .demo-section {
+                	width: 600px;
+                }
+                #example
+                {
+                	 margin-left:20%;
+                	
+                }
+                .demo-section
+                {
+                	 margin: 2em auto !important;
+                }
+                .sunny, .cloudy, .rainy {
+                    display: inline-block;
+                    width: 128px;
+                }
+
+                .cloudy{
+                    background-position: -128px 0;
+                }
+
+                .rainy{
+                    background-position: -256px 0;
+                }
+
+                .weather {
+                    padding: 65px 110px 50px 0;
+                }
+
+                #tabstrip h2 {
+                    font-weight: lighter;
+                    font-size: 5em;
+                    line-height: 1;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                #tabstrip h2 span {
+                    background: none;
+                    padding-left: 5px;
+                    font-size: .5em;
+                    vertical-align: top;
+                }
+
+                #tabstrip p {
+                    margin: 0;
+                    padding: 0;
+                }
+            </style>
+            <script>
+                $(document).ready(function () {
+                    $("#tabstrip").kendoTabStrip({
+                        animation: {
+                            open: {
+                                effects: "fadeIn"
+                            }
+                        }
+                    });
+                });
+            </script>
+            <script>
+                $(function () {
+                    $("form").kendoValidator();
+                });
+</script>
+}

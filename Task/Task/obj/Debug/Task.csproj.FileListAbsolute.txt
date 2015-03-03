@@ -1,0 +1,46 @@
+E:\MVC\Task\Task\bin\Task.dll
+E:\MVC\Task\Task\bin\Task.pdb
+E:\MVC\Task\Task\bin\EntityFramework.dll
+E:\MVC\Task\Task\bin\SigmaUtils.dll
+E:\MVC\Task\Task\bin\EntityFramework.xml
+E:\MVC\Task\Task\obj\Debug\Task.dll
+E:\MVC\Task\Task\obj\Debug\Task.pdb
+D:\Task\Task\bin\Task.dll
+D:\Task\Task\bin\Task.pdb
+D:\Task\Task\bin\EntityFramework.dll
+D:\Task\Task\bin\EntityFramework.xml
+D:\Task\Task\obj\Debug\ResolveAssemblyReference.cache
+D:\Task\Task\obj\Debug\Task.dll
+D:\Task\Task\obj\Debug\Task.pdb
+E:\MVC\Task\Task\obj\Debug\Task.csprojResolveAssemblyReference.cache
+E:\Task\Task\bin\Task.dll
+E:\Task\Task\bin\Task.pdb
+E:\Task\Task\bin\EntityFramework.dll
+E:\Task\Task\bin\SigmaUtils.dll
+E:\Task\Task\bin\EntityFramework.xml
+E:\Task\Task\obj\Debug\Task.csprojResolveAssemblyReference.cache
+E:\Task\Task\obj\Debug\Task.dll
+E:\Task\Task\obj\Debug\Task.pdb
+E:\Balamurugan\bala\New folder (2)\Task\Task\obj\Debug\ResolveAssemblyReference.cache
+E:\Balamurugan\bala\New folder (2)\Task\Task\bin\Task.dll
+E:\Balamurugan\bala\New folder (2)\Task\Task\bin\Task.pdb
+E:\Balamurugan\bala\New folder (2)\Task\Task\bin\EntityFramework.dll
+E:\Balamurugan\bala\New folder (2)\Task\Task\bin\SigmaUtils.dll
+E:\Balamurugan\bala\New folder (2)\Task\Task\bin\EntityFramework.xml
+E:\Balamurugan\bala\New folder (2)\Task\Task\obj\Debug\Task.dll
+E:\Balamurugan\bala\New folder (2)\Task\Task\obj\Debug\Task.pdb
+E:\Project\Task\Task\bin\Task.dll
+E:\Project\Task\Task\bin\Task.pdb
+E:\Project\Task\Task\bin\EntityFramework.dll
+E:\Project\Task\Task\bin\EntityFramework.xml
+E:\Project\Task\Task\obj\Debug\Task.csprojResolveAssemblyReference.cache
+E:\Project\Task\Task\obj\Debug\Task.dll
+E:\Project\Task\Task\obj\Debug\Task.pdb
+E:\Balamurugan\bala\TASK\Task\Task\bin\Task.dll
+E:\Balamurugan\bala\TASK\Task\Task\bin\Task.pdb
+E:\Balamurugan\bala\TASK\Task\Task\bin\EntityFramework.dll
+E:\Balamurugan\bala\TASK\Task\Task\bin\SigmaUtils.dll
+E:\Balamurugan\bala\TASK\Task\Task\bin\EntityFramework.xml
+E:\Balamurugan\bala\TASK\Task\Task\obj\Debug\Task.dll
+E:\Balamurugan\bala\TASK\Task\Task\obj\Debug\Task.pdb
+E:\Balamurugan\bala\TASK\Task\Task\obj\Debug\Task.csprojResolveAssemblyReference.cache

@@ -1,0 +1,1682 @@
+﻿@model Task.Models.Univer
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+.class1
+{
+	background-color: #f35800;
+    background-image: none, linear-gradient(to bottom, #f6813f 0px, #f35a03 100%);
+    color: #fff;
+    line-height: 1.72em;
+    box-sizing: content-box;
+}
+
+</style>
+<div class="blog-masthead">
+ <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+                <nav id="navbar" class="blog-nav navbar-collapse collapse">
+                   <a class="blog-nav-item "  href="@Url.Action("Index", "Univer")">Data collect</a>
+                   <a class="blog-nav-item active" href="@Url.Action("Index", "Data_View", new { @class = "blog-nav-item" })">Data View</a>
+                      <a class="blog-nav-item" href="@Url.Action("Login", "Login", new { Name = "logout", @class = "blog-nav-item active" })">Logout</a>
+                </nav>
+            </div>
+ </div>
+
+<div class="panel-wrap">
+    <div id="sidebar">
+        <div id="profile" class="widget">
+            <h3>Universities @*<span class="collapse k-icon k-i-arrowhead-n"></span>*@</h3>
+            <div class="ffff">
+
+
+
+         @foreach (var x in Model.uni)
+         {
+             
+             if(@Model.Name==@x.Universities_Name)
+             {
+                  <a class="class1" href="@Url.Action("View", "Univer", new { @Name = @x.En_Universities_Name })">@x.Universities_Name</a><br />
+             }
+             else
+             {
+             
+             <a href="@Url.Action("View", "Univer", new { @Name = @x.En_Universities_Name })">@x.Universities_Name</a><br />
+             }
+
+         }
+            </div>
+        </div>
+
+        </div>
+
+        <div id="example">
+
+       <table align="center">
+<tr>
+<td>
+<h2>Admission</h2>
+</td>
+</tr>
+</table>
+
+University :  @Model.Name
+
+
+       @using (Html.BeginForm())
+       {
+           
+           <div class="demo-section k-header">
+            <div id="tabstrip">
+                            <ul>
+                                <li class="k-state-active">
+                                    Application Fees
+                                </li>
+                                <li>
+                                    Fall Adminssion
+                                </li>
+
+                                 <li>
+                                   Spring Adminssion
+                                </li>
+                                <li>
+                                    Summer Admission
+                                </li>
+                            </ul>
+
+                            <div class="weather">
+
+                             @if (@Model.count == 1)
+                             {
+
+                              <div style="background-color:#e0e0e0; width:100%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:24%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+
+                                       
+                                          <table width="100%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td style=" width:28%;">
+                                            Application Fees
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Fee)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Fee)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                            Application Fee Waiver
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Weaver)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Weaver)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                           Fee Waiver Notes
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Notes)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Notes)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                           Data URL
+                                          </td>
+                                          <td>
+                                          @if (@Model.Domestic_URL == "")
+                                          {
+                                          @Html.DisplayFor(x => x.Domestic_URL)
+                                          }
+                                          else
+                                          {
+                                          <a href="@Model.Domestic_URL" target="_blank">@Model.Domestic_URL</a>
+                                          }
+                                          </td>
+                                          <td>
+                                           @if (@Model.International_URL == "")
+                                           {
+                                          @Html.DisplayFor(x => x.International_URL)
+                                           }
+                                           else
+                                           {
+                                          <a href="@Model.International_URL" target="_blank">@Model.International_URL</a>
+                                           }
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                 
+                                           if (@Model.Status == "Process")
+                                           {  <table>
+                                     <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Comments, new { @class = "k-textbox k-invalid" })
+                                          </td>
+                                        
+                                          </tr>
+                                          <tr>
+                                          <td colspan="2" align="center">
+                                           <button id="primaryTextButton"  name="Save" value="Pass" class="k-primary" style=" margin-top:2%;">Pass</button>
+                                           <button id="primaryTextButton1"  name="Save" value="Fail" class="k-primary" style=" margin-top:2%;">Fail</button>
+                                          </td>
+                                          </tr>
+                                       </table>
+                                           }
+                                           else
+                                           {
+                                     <table>
+                                      <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Comments)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td >
+                                         <b>   Application Status </b>:
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Status)
+                                          </td>
+                                          </tr>
+                                     </table>
+                                           }
+                             }
+                             else
+                             {
+                                 <table align="center">
+                                 <tr>
+                                 <td>
+                                 No Application Fees Available
+                                 </td>
+                                 </tr>
+                                 </table>
+                             }
+                              <span class="sunny">&nbsp;</span>
+                            </div>
+
+                             <div class="weather">
+                             <table align="center">
+                                <tr>
+                                <td>
+                                 @Html.RadioButton("Application", 1, new { onclick = "Fall(this);" })Application Dates
+                                  @Html.RadioButton("Application", 2, new { onclick = "Fall(this);" })Early Admission
+
+                                </td>
+                                </tr>
+                                </table>
+                                 <div id="Application1" style="display:none">
+                                  @if (@Model.Fall_count == 1)
+                                  {
+                                      <div style="background-color:#e0e0e0; width:100%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:38%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+                                     
+                                     
+                                     <table width="114%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td style=" width:36%;">
+                                            Regular Admission Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Admission_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Admission_Deadline)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                            Regular Admission Notification
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Admission_Notification)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Admission_Notification)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                            Regular Admission Deposit Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Admission_Deposit_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Admission_Deposit_Deadline)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                          Accept Offer Of Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Admission_Offer)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Admission_Offer)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>
+                                         Waiting List Used
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Admission_WaitingListUsed)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Admission_WaitingListUsed)
+                                          </td>
+                                          </tr>
+
+                                            <tr>
+                                            <td>
+                                         Defer Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Defer_Admission)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Defer_Admission)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                            <td>
+                                         Transfer Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Transfer_Admission)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Transfer_Admission)
+                                          </td>
+                                          </tr>
+
+
+                                            <tr>
+                                            <td>
+                                         Fiancial Aid Application Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Application_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Application_Deadline)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Admission Notes
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Admission_Notes)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Admission_Notes)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Data URL
+                                          </td>
+                                          <td>
+                                           @if (@Model.Domestic_Data_URL == "")
+                                           {
+                                          @Html.DisplayFor(x => x.Domestic_Data_URL)
+                                           }
+                                           else
+                                           {
+                                          <a href="@Model.Domestic_Data_URL" target="_blank">@Model.Domestic_Data_URL</a>
+                                           }
+                                          </td>
+                                          <td>
+                                           @if (@Model.International_Data_URL == "")
+                                           {
+                                          @Html.DisplayFor(x => x.International_Data_URL)
+                                           }
+                                           else
+                                           {
+                                          <a href="@Model.International_Data_URL" target="_blank">@Model.International_Data_URL</a>
+                                           }
+                                          </td>
+                                          </tr>
+
+                                           
+
+                                          </table>
+                                           if (@Model.Fall_Status == "Process")
+                                           { 
+                                          <table>
+                                     <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Fall_Comments, new { @class = "k-textbox k-invalid", width = "100px" })
+                                          </td>
+                                        
+                                          </tr>
+                                          <tr>
+                                          <td colspan="2" align="center">
+                                           <button id="primaryTextButto2"  name="Save" value="Fall_Pass" class="k-primary" style=" margin-top:2%;">Pass</button>
+                                           <button id="primaryTextButton3"  name="Save" value="Fall_Fail" class="k-primary" style=" margin-top:2%;">Fail</button>
+                                          </td>
+                                          </tr>
+                                       </table>
+                                          
+                                          
+                                           }
+                                           else
+                                           {
+                                          <table  style=" margin-top:2%;">
+                                           <tr>
+                                          <td>
+                                           Review Comment :
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Fall_Comments)
+                                          </td>
+                                        
+                                          </tr>
+                                           <tr>
+                                          <td >
+                                         <b>   Application Status </b>:
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Fall_Status)
+                                          </td>
+                                          </tr>
+
+                                          </table>
+
+                                           }
+                                  }
+                                  else
+                                  {
+                                 <table align="center">
+                                 <tr>
+                                 <td>
+                                 No Fall Admission Application Dates
+                                 </td>
+                                 </tr>
+                                 </table>
+                                  }
+                                 </div>
+
+                                  <div id="Early" style="display:none">
+                                   @if (@Model.Early_count == 1)
+                                   {
+                                       
+                                       <div style="background-color:#e0e0e0; width:100%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:38%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+
+                                        <table width="100%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td style=" width:40%;">
+                                            Early Decision Offered
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Decision_Offered)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Decision_Offered)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                             Early Decision Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Decision_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Decision_Deadline)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                            Early Decision Notification
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Earlr_Notification)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Earlr_Notification)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                          Early Decision Deposit Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Deposit_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Deposit_Deadline)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>
+                                        Financial Aid Application Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Financial_Aid_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Financial_Aid_Deadline)
+                                          </td>
+                                          </tr>
+
+                                            <tr>
+                                            <td>
+                                         Early Action Offered
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Action_offered)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Action_offered)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                            <td>
+                                         Early Action Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Action_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Action_Deadline)
+                                          </td>
+                                          </tr>
+
+
+                                            <tr>
+                                            <td>
+                                          Early Action Notification
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Action_Notification)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Action_Notification)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Early Decision or Action Notes
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Notes)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Early_Notes)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Data URL
+                                          </td>
+                                          <td>
+                                          @if (@Model.Domestic_Early_Data_URL == "")
+                                          {
+                                          @Html.DisplayFor(x => x.Domestic_Early_Data_URL)
+                                          }
+                                          else
+                                          {
+                                          <a href="@Model.Domestic_Early_Data_URL" target="_blank">@Model.Domestic_Early_Data_URL</a>
+                                          }
+                                          </td>
+                                          <td>
+                                          @if (@Model.International_Early_Data_URL == "")
+                                          {
+                                          @Html.DisplayFor(x => x.International_Early_Data_URL)
+                                          }
+                                          else
+                                          {
+                                          <a href="@Model.International_Early_Data_URL" target="_blank">@Model.International_Early_Data_URL</a>
+                                          }
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                       
+                                          if (@Model.Early_Status == "Process")
+                                          { 
+                                          <table>
+                                     <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Early_Comments, new { @class = "k-textbox k-invalid", width = "100px" })
+                                          </td>
+                                        
+                                          </tr>
+                                          <tr>
+                                          <td colspan="2" align="center">
+                                           <button id="primaryTextButto4"  name="Save" value="Early_Pass" class="k-primary" style=" margin-top:2%;">Pass</button>
+                                           <button id="primaryTextButton5"  name="Save" value="Early_Fail" class="k-primary" style=" margin-top:2%;">Fail</button>
+                                          </td>
+                                          </tr>
+                                       </table>
+                                          
+                                          
+                                          }
+                                          else
+                                          {
+                                          <table  style=" margin-top:2%;">
+                                           <tr>
+                                          <td>
+                                           Review Comment :
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Early_Comments)
+                                          </td>
+                                        
+                                          </tr>
+                                           <tr>
+                                          <td >
+                                         <b>   Application Status </b>:
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Early_Status)
+                                          </td>
+                                          </tr>
+
+                                          </table>
+
+                                          }
+
+
+                                   }
+                                   else
+                                   {
+                                 <table align="center">
+                                 <tr>
+                                 <td>
+                                 No Fall Early Admission
+                                 </td>
+                                 </tr>
+                                 </table>
+                                   }
+                                  </div>
+
+                             </div>
+
+                              <div class="weather">
+                             <table align="center">
+                                <tr>
+                                <td>
+                                 @Html.RadioButton("Application2", 1, new { onclick = "Fall1(this);" })Application Dates
+                                  @Html.RadioButton("Application2", 2, new { onclick = "Fall1(this);" })Priority Admission
+
+                                </td>
+                                </tr>
+                                </table>
+
+                                <div id="SpringApplication" style="display:none">
+                                      @if (@Model.Spring_count == 1)
+                                      {
+                                          
+                                          <div style="background-color:#e0e0e0; width:100%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:38%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+                                     
+                                     
+                                     <table width="100%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td style=" width:40%;">
+                                            Regular Admission Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Regular_Admission_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Regular_Admission_Deadline)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                            Regular Admission Notification
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Admission_Notification)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Admission_Notification)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                            Regular Admission Deposit Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Deposit_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Deposit_Deadline)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                          Accept Offer Of Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Accept_Offer)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Accept_Offer)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>
+                                         Waiting List Used
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Admission_WaitingListUsed)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Admission_WaitingListUsed)
+                                          </td>
+                                          </tr>
+
+                                            <tr>
+                                            <td>
+                                         Defer Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Defer_Admission)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Defer_Admission)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                            <td>
+                                         Transfer Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Transfer_Admission)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Transfer_Admission)
+                                          </td>
+                                          </tr>
+
+
+                                            <tr>
+                                            <td>
+                                         Fiancial Aid Application Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Financial_Aid_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Financial_Aid_Deadline)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Admission Notes
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Admission_Notes)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Admission_Notes)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Data URL
+                                          </td>
+                                          <td>
+                                           @if (@Model.Domestic_Spring_Data_URL == "")
+                                           {
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Data_URL)
+                                           }
+                                           else
+                                           {
+                                          <a href="@Model.Domestic_Spring_Data_URL" target="_blank">@Model.Domestic_Early_Data_URL</a>
+                                           }
+                                          </td>
+                                          <td>
+                                           @if (@Model.International_Spring_Data_URL == "")
+                                           {
+                                          @Html.DisplayFor(x => x.International_Spring_Data_URL)
+                                           }
+                                           else
+                                           {
+                                          <a href="@Model.International_Spring_Data_URL" target="_blank">@Model.International_Spring_Data_URL</a>
+                                           }
+                                          </td>
+                                          </tr>
+
+                                            
+
+                                          </table>
+                                          
+                                           if (@Model.Spring_Status == "process")
+                                           {
+                                               <table>
+                                     <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Spring_Comments, new { @class = "k-textbox k-invalid", width = "100px" })
+                                          </td>
+                                        
+                                          </tr>
+                                          <tr>
+                                          <td colspan="2" align="center">
+                                           <button id="primaryTextButto6"  name="Save" value="Spring_Pass" class="k-primary" style=" margin-top:2%;">Pass</button>
+                                           <button id="primaryTextButton7"  name="Save" value="Spring_Fail" class="k-primary" style=" margin-top:2%;">Fail</button>
+                                          </td>
+                                          </tr>
+                                       </table>
+                                           }
+                                           else
+                                           {
+                                              
+                                               <table  style=" margin-top:2%;">
+                                          <tr>
+                                          <td>
+                                           Review Comment :
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Comments)
+                                          </td>
+                                         
+                                          </tr>
+                                           <tr>
+                                          <td >
+                                         <b>   Application Status </b>:
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Spring_Status)
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                           }
+
+                                      }
+                                      else
+                                      {
+                                          <table align="center">
+                                 <tr>
+                                 <td>
+                                 No Spring Application Dates
+                                 </td>
+                                 </tr>
+                                 </table>
+                                      }
+                                </div>
+
+                                <div id="SpringPriority" style="display:none">
+                                         @if (@Model.Spring_Priority_count == 1)
+                                         {
+                                              <div style="background-color:#e0e0e0; width:100%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:38%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+                                     
+                                     
+                                     <table width="100%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td style=" width:40%;">
+                                            Priority Decision Offered
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Priority_Decision_Offered)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Priority_Decision_Offered)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                            Priority Decision Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Priority_Decision_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Priority_Decision_Deadline)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                            Priority Decision Notification
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Priority_Decision_Notification)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Priority_Decision_Notification)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                          Priority Decision Deposit Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Spring_Priority_Deposit_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Spring_Priority_Deposit_Deadline)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>
+                                      Financial Aid Application Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_ESpring_Priority_Financial_Aid_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_ESpring_Priority_Financial_Aid_Deadline)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                       Priority Admission Notes
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_ESpring_Priority_Notes)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_ESpring_Priority_Notes)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Data URL
+                                          </td>
+                                          <td>
+                                          @if (@Model.Domestic_ESpring_Priority_Data_URL == "")
+                                          {
+                                          @Html.DisplayFor(x => x.Domestic_ESpring_Priority_Data_URL)
+                                          }
+                                          else
+                                          {
+                                          <a href="@Model.Domestic_ESpring_Priority_Data_URL" target="_blank">@Model.Domestic_ESpring_Priority_Data_URL</a>
+                                          }
+                                          </td>
+                                          <td>
+                                          @if (@Model.International_ESpring_Priority_Data_URL == "")
+                                          {
+                                          @Html.DisplayFor(x => x.International_ESpring_Priority_Data_URL)
+                                          }
+                                          else
+                                          {
+                                          <a href="@Model.International_ESpring_Priority_Data_URL" target="_blank">@Model.International_ESpring_Priority_Data_URL</a>
+                                          }
+                                          </td>
+                                          </tr>
+
+                                          
+
+                                          </table>
+                                             
+                                          if (@Model.Spring_Priority_Status == "Process")
+                                          {
+                                               <table>
+                                     <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_ESpring_Priority_Comments, new { @class = "k-textbox k-invalid", width = "100px" })
+                                          </td>
+                                        
+                                          </tr>
+                                          <tr>
+                                          <td colspan="2" align="center">
+                                           <button id="primaryTextButto8"  name="Save" value="Priority_Pass" class="k-primary" style=" margin-top:2%;">Pass</button>
+                                           <button id="primaryTextButton9"  name="Save" value="Priority_Fail" class="k-primary" style=" margin-top:2%;">Fail</button>
+                                          </td>
+                                          </tr>
+                                       </table>
+                                          }
+                                          else
+                                          {
+                                              
+                                               <table  style=" margin-top:2%;">
+                                          <tr>
+                                          <td>
+                                           Review Comment :
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_ESpring_Priority_Comments)
+                                          </td>
+                                         
+                                          </tr>
+                                           <tr>
+                                          <td >
+                                         <b>   Application Status </b>:
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Spring_Priority_Status)
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          }
+
+                                         }
+                                         else
+                                         {
+                                          <table align="center">
+                                 <tr>
+                                 <td>
+                                 No Spring Priority Application Dates
+                                 </td>
+                                 </tr>
+                                 </table>
+                                         }
+                                </div>
+
+                                </div>
+
+                                <div class="weather">
+                                <table align="center">
+                                <tr>
+                                <td>
+                                 @Html.RadioButton("Application1", 1, new { onclick = "Fall2(this);" })Application Dates
+                                  @Html.RadioButton("Application1", 2, new { onclick = "Fall2(this);" })Priority Admission
+
+                                </td>
+                                </tr>
+                                </table>
+
+                                <div id="SummerApplication" style="display:none">
+                                 @if (@Model.Summer_count == 1)
+                                 {
+                                            <div style="background-color:#e0e0e0; width:100%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:38%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+                                            
+                                            <table width="114%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td style=" width:40%;">
+                                            Regular Admission Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Regular_Admission_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Regular_Admission_Deadline)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                            Regular Admission Notification
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Admission_Notification)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Admission_Notification)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                            Regular Admission Deposit Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Deposit_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Deposit_Deadline)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                          Accept Offer Of Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Accept_Offer)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Accept_Offer)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>
+                                         Waiting List Used
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Admission_WaitingListUsed)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Admission_WaitingListUsed)
+                                          </td>
+                                          </tr>
+
+                                            <tr>
+                                            <td>
+                                         Defer Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Defer_Admission)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Defer_Admission)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                            <td>
+                                         Transfer Admission
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Transfer_Admission)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Transfer_Admission)
+                                          </td>
+                                          </tr>
+
+
+                                            <tr>
+                                            <td>
+                                         Fiancial Aid Application Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Financial_Aid_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Financial_Aid_Deadline)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Admission Notes
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Admission_Notes)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Admission_Notes)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Data URL
+                                          </td>
+                                          <td>
+                                            @if (@Model.Domestic_Summer_Data_URL == "")
+                                            {
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Data_URL)
+                                            }
+                                            else
+                                            {
+                                          <a href="@Model.Domestic_Summer_Data_URL" target="_blank">@Model.Domestic_Summer_Data_URL</a>
+                                            }
+                                          </td>
+                                          <td>
+                                            @if (@Model.International_Summer_Data_URL == "")
+                                            {
+                                          @Html.DisplayFor(x => x.International_Summer_Data_URL)
+                                            }
+                                            else
+                                            {
+                                          <a href="@Model.International_Summer_Data_URL" target="_blank">@Model.International_Summer_Data_URL</a>
+                                            }
+                                          
+                                          </td>
+                                          </tr>
+
+                                           
+
+                                          </table>
+                                            if (@Model.Summer_Status == "Process")
+                                            {
+                                               <table>
+                                     <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_Summer_Comments, new { @class = "k-textbox k-invalid", width = "100px" })
+                                          </td>
+                                        
+                                          </tr>
+                                          <tr>
+                                          <td colspan="2" align="center">
+                                           <button id="primaryTextButto10"  name="Save" value="Summer_Pass" class="k-primary" style=" margin-top:2%;">Pass</button>
+                                           <button id="primaryTextButton11"  name="Save" value="Summer_Fail" class="k-primary" style=" margin-top:2%;">Fail</button>
+                                          </td>
+                                          </tr>
+                                       </table>
+                                            }
+                                            else
+                                            {
+                                              
+                                               <table  style=" margin-top:2%;">
+                                          <tr>
+                                          <td>
+                                           Review Comment :
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Comments)
+                                          </td>
+                                         
+                                          </tr>
+                                           <tr>
+                                          <td >
+                                         <b>   Application Status </b>:
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Summer_Status)
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                            }
+
+                                 }
+                                 else
+                                 {
+                                            <table align="center">
+                                 <tr>
+                                 <td>
+                                 No Summer Application Dates
+                                 </td>
+                                 </tr>
+                                 </table>
+                                 }
+                                </div>
+
+                                <div id="SummerPriority" style="display:none">
+                                              @if (@Model.Priority_count == 1)
+                                              {
+                                                  
+                                                  <div style="background-color:#e0e0e0; width:100%;">
+                                          
+                                           <table width="100%">
+                                          
+                                          <tr>
+                                          <td style=" width:38%;">
+                                          
+                                          </td>
+                                          <td style=" width:30%;">
+                                          Domestic Applicant
+                                          </td>
+                                          <td>
+                                          International Applicant
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                          </div>
+                                     
+                                     
+                                     <table width="100%" style=" margin-top:2%;">
+
+                                           <tr>
+                                          <td style=" width:40%;">
+                                            Priority Decision Offered
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Priority_Decision_Offered)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Priority_Decision_Offered)
+                                          </td>
+                                          </tr>
+                                          <tr>
+                                          <td>
+                                            Priority Decision Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Priority_Decision_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Priority_Decision_Deadline)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                          <td>
+                                            Priority Decision Notification
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Priority_Decision_Notification)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Priority_Decision_Notification)
+                                          </td>
+                                          </tr>
+
+                                           <tr>
+                                          <td>
+                                          Priority Decision Deposit Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_Summer_Priority_Deposit_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_Summer_Priority_Deposit_Deadline)
+                                          </td>
+                                          </tr>
+
+                                          <tr>
+                                            <td>
+                                      Financial Aid Application Deadline
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_ESummer_Priority_Financial_Aid_Deadline)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_ESummer_Priority_Financial_Aid_Deadline)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                       Priority Admission Notes
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_ESummer_Priority_Notes)
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.International_ESummer_Priority_Notes)
+                                          </td>
+                                          </tr>
+
+                                             <tr>
+                                            <td>
+                                         Data URL
+                                          </td>
+                                          <td>
+                                            @if (@Model.Domestic_ESummer_Priority_Data_URL == "")
+                                            {
+                                          @Html.DisplayFor(x => x.Domestic_ESummer_Priority_Data_URL)
+                                            }
+                                            else
+                                            {
+                                          <a href="@Model.Domestic_ESummer_Priority_Data_URL" target="_blank">@Model.Domestic_ESummer_Priority_Data_URL</a>
+                                            }
+
+                                          </td>
+                                          <td>
+
+                                             @if (@Model.International_ESummer_Priority_Data_URL == "")
+                                             {
+                                          @Html.DisplayFor(x => x.International_ESummer_Priority_Data_URL)
+                                             }
+                                             else
+                                             {
+                                          <a href="@Model.International_ESummer_Priority_Data_URL" target="_blank">@Model.International_ESummer_Priority_Data_URL</a>
+                                             }
+                                          </td>
+                                          </tr>
+
+                                         
+
+                                          </table>
+                                                  
+                                             if (@Model.Priority_Status == "Process")
+                                             {
+                                               <table>
+                                     <tr>
+                                          <td>
+                                           Review Comment
+                                          </td>
+                                          <td>
+                                          @Html.TextBoxFor(x => x.Domestic_ESummer_Priority_Comments, new { @class = "k-textbox k-invalid", width = "100px" })
+                                          </td>
+                                        
+                                          </tr>
+                                          <tr>
+                                          <td colspan="2" align="center">
+                                           <button id="primaryTextButto12"  name="Save" value="Summer_P_Pass" class="k-primary" style=" margin-top:2%;">Pass</button>
+                                           <button id="primaryTextButton21"  name="Save" value="Summer_p_Fail" class="k-primary" style=" margin-top:2%;">Fail</button>
+                                          </td>
+                                          </tr>
+                                       </table>
+                                             }
+                                             else
+                                             {
+                                              
+                                               <table  style=" margin-top:2%;">
+                                          <tr>
+                                          <td>
+                                           Review Comment :
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Domestic_ESummer_Priority_Comments)
+                                          </td>
+                                         
+                                          </tr>
+                                           <tr>
+                                          <td >
+                                         <b>   Application Status </b>:
+                                          </td>
+                                          <td>
+                                          @Html.DisplayFor(x => x.Priority_Status)
+                                          </td>
+                                          </tr>
+
+                                          </table>
+                                             }
+                                              }
+                                              else
+                                              {
+                                                  <table align="center">
+                                 <tr>
+                                 <td>
+                                 No Summer Priority Application Dates
+                                 </td>
+                                 </tr>
+                                 </table>
+                                              }  
+                                </div>
+                                </div>
+            </div>
+
+           </div>
+           
+           
+        <style>
+                .demo-section {
+                	width: 640px;
+                }
+                #example
+                {
+                	 margin-left:3%;
+                	
+                }
+                .demo-section
+                {
+                	 margin: 2em auto !important;
+                }
+                .sunny, .cloudy, .rainy {
+                    display: inline-block;
+                    width: 128px;
+                }
+
+                .cloudy{
+                    background-position: -128px 0;
+                }
+
+                .rainy{
+                    background-position: -256px 0;
+                }
+
+                .weather {
+                    padding: 14px 110px 50px 0;
+                }
+
+                #tabstrip h2 {
+                    font-weight: lighter;
+                    font-size: 5em;
+                    line-height: 1;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                #tabstrip h2 span {
+                    background: none;
+                    padding-left: 5px;
+                    font-size: .5em;
+                    vertical-align: top;
+                }
+
+                #tabstrip p {
+                    margin: 0;
+                    padding: 0;
+                }
+            </style>
+            <script>
+                $(document).ready(function () {
+                    $("#tabstrip").kendoTabStrip({
+                        animation: {
+                            open: {
+                                effects: "fadeIn"
+                            }
+                        }
+                    });
+                });
+            </script>
+            <script>
+                $(function () {
+                    $("form").kendoValidator();
+                });
+</script>
+           
+                                              if (@ViewBag.Message != null && @ViewBag.Message != "")
+                                              {
+<script>
+
+    $(document).ready(function () {
+
+        alert('@ViewBag.Message');
+
+    });
+
+</script>
+
+                                              }
+       }
+
+</div>
+
+        </div>
+        <script type="text/javascript">
+
+            function Fall(radio) {
+                debugger;
+                if (radio.value == 1) {
+                    var id = document.getElementById("Application1");
+                    var id1 = document.getElementById("Early");
+                    id.style.display = "block";
+                    id1.style.display = "none";
+                }
+                else {
+                    var id = document.getElementById("Application1");
+                    var id1 = document.getElementById("Early");
+                    id.style.display = "none";
+                    id1.style.display = "block";
+                }
+            }
+</script>
+<style type="text/css">
+.k-autocomplete, .k-combobox, .k-datepicker, .k-timepicker, .k-datetimepicker, .k-colorpicker, .k-numerictextbox, .k-dropdown, .k-selectbox, .k-textbox, .k-toolbar .k-split-button
+{
+	 width: 36em;
+}
+</style>
+<script type="text/javascript">
+
+    function Fall1(radio) {
+        debugger;
+        if (radio.value == 1) {
+            var id = document.getElementById("SpringApplication");
+            var id1 = document.getElementById("SpringPriority");
+            id.style.display = "block";
+            id1.style.display = "none";
+        }
+        else {
+            var id = document.getElementById("SpringApplication");
+            var id1 = document.getElementById("SpringPriority");
+            id.style.display = "none";
+            id1.style.display = "block";
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+    function Fall2(radio) {
+        debugger;
+        if (radio.value == 1) {
+            var id = document.getElementById("SummerApplication");
+            var id1 = document.getElementById("SummerPriority");
+            id.style.display = "block";
+            id1.style.display = "none";
+        }
+        else {
+            var id = document.getElementById("SummerApplication");
+            var id1 = document.getElementById("SummerPriority");
+            id.style.display = "none";
+            id1.style.display = "block";
+        }
+    }
+</script>
